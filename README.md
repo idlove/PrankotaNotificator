@@ -24,3 +24,6 @@ chmod +x nw
 ./nw source
 </code><br/>
 Так же, для Linux есть готовый билд - его можно скачать в репозитории
+<br/>
+#Скриншоты
+<img src="http://img.leprosorium.com/2354104"/> <img src="http://img.leprosorium.com/2354110" />
