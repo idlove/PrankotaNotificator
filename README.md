@@ -20,8 +20,7 @@ nw.exe source
 #Запуск на Linux
 Для запуска, используйте следующие команды терминала<br/>
 <code>
-chmod +x nw <br/>
-./nw source
+chmod +x nw && ./nw source
 </code><br/>
 Так же, для Linux есть готовый билд - его можно скачать в репозитории
 <br/>
