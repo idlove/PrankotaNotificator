@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <meta charset="utf-8">
+      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <title>Prankota Notificator</title>
+  </head>
+  <body>
+    <script>
+    
+        function onStart()
+        {
+            var fs = require('fs');
+
+                if (fs.existsSync('runflag.flag')) {
+                    
+                }else{
+                    var fd = fs.openSync('runflag.flag', 'w');
+                    var nwNotify = require('nw-notify');
+                        nwNotify.setConfig({
+                            appIcon: 'https://pp.vk.me/c623221/v623221137/d267/uUtBCrz7Ax8.jpg',
+                            displayTime: 12000
+                        });
+
+                        nwNotify.notify("Prankota.com","Это ваш первый запуск нотификатора!");
+                     nwNotify.notify("Prankota.com","Клините на это уведомление, что бы перейти к новости",'http://prankota.com/notificator');
+                   nwNotify.notify("Prankota.com","Автозагрузка может быть обеспечена добавлением в <b>rc.local</b>"); 
+                }
+        }
+    
+    var globFirstData = "";
+    
+        function explode( delimiter, string ) {	
+
+	var emptyArray = { 0: '' };
+
+	if ( arguments.length != 2
+		|| typeof arguments[0] == 'undefined'
+		|| typeof arguments[1] == 'undefined' )
+	{
+		return null;
+	}
+
+	if ( delimiter === ''
+		|| delimiter === false
+		|| delimiter === null )
+	{
+		return false;
+	}
+
+	if ( typeof delimiter == 'function'
+		|| typeof delimiter == 'object'
+		|| typeof string == 'function'
+		|| typeof string == 'object' )
+	{
+		return emptyArray;
+	}
+
+	if ( delimiter === true ) {
+		delimiter = '1';
+	}
+
+	return string.toString().split ( delimiter.toString() );
+}
+        
+        
+    function tick_Handler(data)
+        {
+        
+            if(data!=globFirstData)
+            {
+        var nwNotify = require('nw-notify');
+        nwNotify.setConfig({
+            appIcon: 'https://pp.vk.me/c623221/v623221137/d267/uUtBCrz7Ax8.jpg',
+            displayTime: 6000
+        });
+        
+        var DataArray = explode(";",data);
+        nwNotify.notify("Prankota.com", DataArray[0],DataArray[1]);
+        globFirstData = data;
+            }
+        }
+        
+    function init_Handler(data)
+        {
+        
+        globFirstData = data;
+        setInterval(function() {
+            $.get("http://prankota.com/not.txt",function(data){
+                tick_Handler(data);
+            });
+
+    },5000);
+            
+        }
+    
+     onStart();
+     $.get("http://prankota.com/not.txt",function(data){
+                init_Handler(data);
+            });
+  
+    </script>
+</html>

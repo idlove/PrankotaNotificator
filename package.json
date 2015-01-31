@@ -1,0 +1,11 @@
+{
+  "name": "Prankota Notificator",
+  "main": "index.html",
+    
+    "window": {
+    "toolbar": false,
+    "resizable": false,
+    "show": false,
+    "show_in_taskbar": false
+    }
+}
